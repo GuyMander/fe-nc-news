@@ -2,6 +2,7 @@ import "./Articles.css"
 import { getArticles } from "../../api"
 import { useState, useEffect } from "react"
 import { Routes, Route, Link } from "react-router-dom"
+import CommentsById from "../CommentsById/CommentsById"
 
 function Articles() {
 
@@ -44,12 +45,8 @@ function Articles() {
 
     return (
         <>
-        <br />
-        <section>
-            <ul>
-                {articlesOutput}
-            </ul>
-        </section>
+        <br />         
+        {articlesOutput}        
         </>
     )
 }

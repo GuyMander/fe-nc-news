@@ -1,8 +1,11 @@
 import {useParams} from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { getArticleById } from '../../api';
+import './ArticleById.css'
+import CommentsById from '../CommentsById/CommentsById';
 
 function ArticleById(){
+    
     const id = useParams().article_id;
     const [isLoading, setIsLoading] = useState(true);
     const [currArticle, setCurrArticle] = useState();
@@ -20,17 +23,14 @@ function ArticleById(){
 
     if(isLoading) return <><p>Loading...</p></>
 
-    getArticleById(id).then((article) => {
-        setCurrArticle(article)
-    })
-
-
     if(currArticle === undefined){
         return <></>
     }
+
     else{
         const d = new Date(currArticle.created_at)
         const formattedDate = d.toUTCString()
+        
 
       return (
             <>
@@ -48,6 +48,7 @@ function ArticleById(){
                         <p>Body: {currArticle.body}</p>
                     </div>
                 </section>
+                <CommentsById article_id={currArticle.article_id}/>
             </>
         )  
     }

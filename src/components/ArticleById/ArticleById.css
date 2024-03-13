@@ -1,0 +1,17 @@
+section {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 50vh;
+    width:75vw;
+    border-radius: 1em;
+    border: 5px solid;
+    border-color: aqua;
+}
+
+.articleView{
+    margin: 1em;
+    padding: 0.5em;
+    font-weight: 500;
+}
