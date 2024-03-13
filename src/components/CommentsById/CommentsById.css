@@ -1,0 +1,42 @@
+.commentsContainer{
+    margin: 0;
+    min-width: 320px;
+    min-height: 50px;
+    width:75vw;
+    border-radius: 1em;
+    border: 5px solid;
+    border-color: coral;
+}
+
+.comment{
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    border: 3px solid;
+    border-color: chocolate;
+}
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  margin:0.5em;
+  padding: 0.6em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: yellow;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  border: 3px solid;
+  border-color: grey;
+}
+button:hover {
+  background-color: orange;
+}
+button:active{
+    background-color: blueviolet;
+}
+/* button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
