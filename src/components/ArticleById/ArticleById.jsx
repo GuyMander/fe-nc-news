@@ -7,7 +7,7 @@ import CommentsById from '../CommentsById/CommentsById';
 function ArticleById(){
 
     function handleVote(e, numOfVotes){
-        const voteObj = { in_votes: numOfVotes };
+        const voteObj = { inc_votes: numOfVotes };
         const votesElement = document.getElementById("votes");
         const votesStr = votesElement.innerHTML;
         let votesNum = +votesStr.substring(votesStr.indexOf(" ")+1);
