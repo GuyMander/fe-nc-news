@@ -3,30 +3,16 @@ import { useState, useEffect } from 'react';
 import { getArticleById, patchVotesByArticleId } from '../../api';
 import './ArticleById.css'
 import CommentsById from '../CommentsById/CommentsById';
+import PostComment from '../PostComment/PostComment';
 
 function ArticleById(){
-
-    function handleVote(e, numOfVotes){
-        const voteObj = { inc_votes: numOfVotes };
-        const votesElement = document.getElementById("votes");
-        const votesStr = votesElement.innerHTML;
-        let votesNum = +votesStr.substring(votesStr.indexOf(" ")+1);
-        votesNum += numOfVotes;
-
-        const replacedHTML = `Votes: ${votesNum}`;
-        votesElement.innerHTML = replacedHTML;       
-        
-        patchVotesByArticleId(id, voteObj)
-        .catch((error) => {
-            document.getElementById('voteApiError').innerHTML = "ERROR WITH VOTE UPDATE REQUEST"
-        })
-        return null
-    }
     
     const id = useParams().article_id;
     const [isLoading, setIsLoading] = useState(true);
     const [currArticle, setCurrArticle] = useState();
-
+    const [isPostShowing, setIsPostShowing] = useState(false);
+    const [isError, setIsError] = useState(false);
+    
     useEffect(() => {
         getArticleById(id)
         .then((fetchedArticle)=> {
@@ -38,11 +24,34 @@ function ArticleById(){
         })
     }, [])
 
+    function handleVote(e, numOfVotes){
+        const voteObj = { inc_votes: numOfVotes };
+
+        setCurrArticle((prevArticle)=>{
+            const copyOfArticle = {...prevArticle};
+            copyOfArticle.votes += numOfVotes;
+            return copyOfArticle;
+        })
+        
+        patchVotesByArticleId(id, voteObj)
+        .catch((error) => {
+            setIsError(true);
+            setCurrArticle((prevArticle)=>{
+                const copyOfArticle = {...prevArticle};
+                copyOfArticle.votes -= numOfVotes;
+                return copyOfArticle;
+            })
+        })
+        return null
+    }
+
+    function handleShowPostComment(){
+        return setIsPostShowing((prevState)=> !prevState)
+    }
+    
     if(isLoading) return <><p>Loading...</p></>
 
-    if(currArticle === undefined){
-        return <></>
-    }
+    if(!currArticle === undefined) return null
 
     else{
         const d = new Date(currArticle.created_at)
@@ -69,7 +78,9 @@ function ArticleById(){
                         <button type='button' onClick={(e) => handleVote(e, 1)} ><img src='/src/assets/thumbs-up.svg' width="50" /></button>
                         <button type='button' onClick={(e) => handleVote(e, -1)} ><img src='/src/assets/thumbs-down.svg' width="50" /></button>
                         <button type='button' onClick={(e) => handleVote(e, -10)} ><img src='/src/assets/poop.svg' width="50" /></button>
-                        <div id="voteApiError"></div>
+                        <div id="voteApiError">{isError? "ERROR WITH VOTE UPDATE REQUEST": null}</div>
+                        <button type='button' id="postCommentButton" onClick={handleShowPostComment}>Post Comment</button>
+                        <PostComment isPostShowing={isPostShowing} />
                     </div>
                 </section>
                 <CommentsById article_id={currArticle.article_id}/>

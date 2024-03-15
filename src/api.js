@@ -26,3 +26,9 @@ export async function patchVotesByArticleId(id, voteObj){
     const updated_article = response.data.updated_article;
     return updated_article;
 }
+
+export async function postNewComment(id, commentObj){
+    const response = await nc_news_API.post(`/articles/${id}/comments`, commentObj);
+    const posted_comment = response.data.posted_comment;
+    return posted_comment;
+}
