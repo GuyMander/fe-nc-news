@@ -32,3 +32,9 @@ export async function postNewComment(id, commentObj){
     const posted_comment = response.data.posted_comment;
     return posted_comment;
 }
+
+export async function deleteCommentById(id){
+    const response = await nc_news_API.delete(`/comments/${id}`);
+    if(response.status === 204)return true;
+    return false
+}
