@@ -12,6 +12,7 @@ function ArticleById(){
     const [currArticle, setCurrArticle] = useState();
     const [isPostShowing, setIsPostShowing] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [newPostedComment, setNewPostedComment] = useState("");
     
     useEffect(() => {
         getArticleById(id)
@@ -80,10 +81,10 @@ function ArticleById(){
                         <button type='button' onClick={(e) => handleVote(e, -10)} ><img src='/src/assets/poop.svg' width="50" /></button>
                         <div id="voteApiError">{isError? "ERROR WITH VOTE UPDATE REQUEST": null}</div>
                         <button type='button' id="postCommentButton" onClick={handleShowPostComment}>Post Comment</button>
-                        <PostComment isPostShowing={isPostShowing} />
+                        <PostComment isPostShowing={isPostShowing} setNewPostedComment={setNewPostedComment}/>
                     </div>
                 </section>
-                <CommentsById article_id={currArticle.article_id}/>
+                <CommentsById article_id={currArticle.article_id} newPostedComment={newPostedComment} />
             </>
         )  
     }

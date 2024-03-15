@@ -20,9 +20,9 @@ function PostComment(props){
         return null;
     }
 
-    function formValidator(e){
+    function formValidator(e, user="jessjelly"){
         e.preventDefault();
-        
+
         setIsPostFailed(false)
         setIsPostSuccessful(false)
         setIsPostEmpty(false)
@@ -38,7 +38,7 @@ function PostComment(props){
 
         const commentForSubmitting = e.target[0].value;
         const commentObj = {
-            username: 'jessjelly',
+            username: user,
             body: commentForSubmitting
         }
         
@@ -51,6 +51,7 @@ function PostComment(props){
             setIsPostSent(false)
             setIsPostFailed(false)
             setIsPostSuccessful(true);
+            props.setNewPostedComment(posted_article);
         })
         .catch((error) => {
             setIsPostSent(false);
