@@ -1,0 +1,41 @@
+#submitCommentButton {
+
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin: 0.5em;
+    padding: 0.6em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    border: 3px solid;
+    border-color: grey;
+}
+
+
+#submitCommentButton:hover {
+    background-color: green;
+}
+
+#submitCommentButton:active {
+    background-color: blueviolet;
+}
+
+#commentBox{
+    width: 75%;
+    min-height: 3em;
+    resize: none;
+}
+
+#red{
+    color:red;
+}
+#green{
+    color: green;
+}
+#yellow{
+    color:yellow;
+}

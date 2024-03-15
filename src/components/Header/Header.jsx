@@ -9,7 +9,7 @@ function Header(){
           <Link to="/"> Home </Link> | 
           <Link to="/topics"> Topics </Link> | 
           <Link to="/articles"> Articles </Link> | 
-          <Link to="/post_article"> Post </Link>
+          <Link to="/post_article"> Post Article</Link>
         </nav>
     </>
   )

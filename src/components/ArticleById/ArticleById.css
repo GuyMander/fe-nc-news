@@ -19,3 +19,26 @@ section {
 #voteApiError{
     color: crimson;
 }
+
+#postCommentButton {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin: 0.5em;
+    padding: 0.6em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: tomato;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    border: 3px solid;
+    border-color: grey;
+}
+
+#postCommentButton:hover {
+    background-color: green;
+}
+
+#postCommentButton:active {
+    background-color: blueviolet;
+}
