@@ -1,18 +1,28 @@
 import "./Articles.css"
 import { getArticles } from "../../api"
 import { useState, useEffect } from "react"
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route, Link, useParams, useSearchParams } from "react-router-dom"
 
 function Articles() {
 
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
+    
+    const sortByTopic = searchParams.get('topic');
 
     useEffect(() => {
         getArticles()
         .then((fetchedArticles)=> {
-            setArticles(fetchedArticles);
-            setIsLoading(false)
+            if(sortByTopic){
+                const sortedArticles = fetchedArticles.filter((article) => article.topic === sortByTopic )
+                setArticles(sortedArticles)
+                setIsLoading(false)
+            }
+            else{
+                setArticles(fetchedArticles);
+                setIsLoading(false)
+            }
         })
         .catch((error)=> {
             console.log(error);
