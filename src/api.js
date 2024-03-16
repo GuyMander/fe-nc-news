@@ -38,3 +38,9 @@ export async function deleteCommentById(id){
     if(response.status === 204)return true;
     return false
 }
+
+export async function getTopics(){
+    const response = await nc_news_API.get(`/topics`);
+    const topics = response.data.topics;
+    return topics;
+}
